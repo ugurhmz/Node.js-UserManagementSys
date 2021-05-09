@@ -1,7 +1,7 @@
 const Employee = require('../models/employeeModel')
 
 
-
+//___________________________________ GET INDEX ______________________________
 exports.getIndex = (req,res) => {
     Employee.find()
         .then(employees =>{
@@ -19,7 +19,7 @@ exports.getAddNew = (req,res) => {
     res.render('new_employee')
 }
 
-
+//______________________________________ POST ADDNEW _________________________
 exports.postAddNew = (req,res) => {
 
     const newEmployee = {
@@ -39,7 +39,7 @@ exports.postAddNew = (req,res) => {
 
 }
 
-
+//_____________________________ GET SEARCH ___________________________________
 exports.getSearchEmployees = (req,res) => {
     
     res.render('search_employee',{
@@ -71,11 +71,6 @@ exports.getQuery = (req,res) =>{
             console.log(err)
         })
  
-  
-
-
-
-
 
     /*
     let search_query = {
@@ -93,4 +88,43 @@ exports.getQuery = (req,res) =>{
         })
     */
     
+}
+
+//___________________________ GET EDIT ___________________________________
+exports.getEditWithID = (req,res) => {
+
+    const employeeEdit = { _id : req.params.id}
+
+    Employee.findOne(employeeEdit)
+        .then(emp => {
+            res.render('edit', {
+                emp:emp
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+}
+
+
+//___________________________ PUT EDIT ___________________________________
+exports.putEditWithID = (req,res) => {
+
+    const employeeEdit = { _id : req.params.id }
+
+    Employee.updateOne(employeeEdit, {
+        $set : {
+            name : req.body.name,
+            designation: req.body.designation,
+            salary : req.body.salary
+        }
+    })
+    .then(() => {
+        res.redirect('/')
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
 }

@@ -1,0 +1,23 @@
+<%- include('include/_header.ejs')  -%> 
+
+    <!-- EDIT -->
+        <div class="container mt-5 w-50">
+            <h2 class="mb-4">Updated Employee</h2>
+
+           
+            <form action="/employee/edit/<%= emp.id %>?_method=PUT" method="POST">
+                <input type="hidden" name="_method" value="PUT">
+                <input type="text" value="<%= emp.name %> " name="name" class="form-control" placeholder="Employee name">
+                <input type="text" value="<%= emp.designation %> " name="designation" class="form-control my-3" placeholder="Employee Designation">   
+                <input type="text" value="<%= emp.salary %> " name="salary" class="form-control " placeholder="Employee Salary">
+                
+                <button type="submit" class="btn btn-primary btn-block mt-2 box-shadow mt-3">
+                    Update
+                </button>
+            </form>
+                     
+        </div>
+
+     <!-- /EDIT -->
+
+<%- include('include/_footer.ejs')  -%> 
