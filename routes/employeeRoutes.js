@@ -9,5 +9,10 @@ router.get('/',(req,res) => {
 })
 
 
+router.get('/employee/add-new', (req,res) => {
+
+    res.render('new_employee')
+})
+
 
 module.exports = router

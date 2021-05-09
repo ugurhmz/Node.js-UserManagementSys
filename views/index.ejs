@@ -1,15 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include ('include/_header.ejs') -%>
+
+<!-- CONTENT-->
+<div class="container mt-5">
+ 
+  <table
+    class="table table-bordered"
+    id="dataTable"
+    width="100%"
+    cellspacing="0"
+  >
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Designation</th>
+        <th>Salary</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th>Name</th>
+        <th>Designation</th>
+        <th>Salary</th>
+        <th>Operations</th>
+      </tr>
+    </tfoot>
+    <tbody>
     
-    <h1>Merhaba Node.js ....</h1>
+      <tr>
+        <td>Ugur</td>
+        <td>Hello</td>
+        <td>5000</td>
+        <td>
+          <a class="btn  btn-primary btn-sm box-shadow floatleft "  href="#">
+            <i class="fas fa-edit"></i> Edit
+        </a>
 
+          <form  >
+            <button  type="submit" class="btn ms-3 floatleft btn-danger btn-sm box-shadow" >
+                <i class="fas fa-trash-alt"></i> Delete
+            </button>
 
-</body>
-</html>
+          </form>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+
+<!-- /CONTECT-->
+
+<%- include ('include/_footer.ejs') -%>

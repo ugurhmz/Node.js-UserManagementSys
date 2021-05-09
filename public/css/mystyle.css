@@ -1,0 +1,15 @@
+.myfont {
+    font-size:1.3rem;
+}
+
+
+.box-shadow {
+    box-shadow: 0 0.375em 0 black;
+    cursor:pointer;
+    
+}
+
+.floatleft {
+    float:left;
+    margin-left:.5rem;
+}
