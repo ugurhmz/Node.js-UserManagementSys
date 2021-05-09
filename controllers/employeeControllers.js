@@ -11,7 +11,8 @@ exports.getIndex = (req,res) => {
             })
         })
         .catch(err => {
-            console.log(err)
+            req.flash('error_msg','Error: '+err)
+             res.redirect('/')
         })
 }
 
@@ -31,11 +32,13 @@ exports.postAddNew = (req,res) => {
 
     Employee.create(newEmployee)
         .then(employee => {
+            req.flash('success_msg','Employee Created successfully....')
             res.redirect('/')
             console.log("employee added successfully..")
         })
         .catch(err => {
-            console.log(err)
+            req.flash('error_msg','Error: '+err)
+             res.redirect('/')
         })
 
 }
@@ -44,7 +47,8 @@ exports.postAddNew = (req,res) => {
 exports.getSearchEmployees = (req,res) => {
     
     res.render('search_employee',{
-        employee:""
+        employee:"",
+        name:""
     })
 }
 
@@ -55,7 +59,9 @@ function escapeRegex(text) {
 };
 
 exports.getQuery = (req,res) =>{
-   
+
+    
+    if (req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
         Employee.find( {
@@ -66,15 +72,22 @@ exports.getQuery = (req,res) =>{
         .sort({$natural : -1})
         .then(employee => {
             res.render('search_employee', {
-                employee:employee
+                employee:employee,
+                name : req.query.search
             })
         })
         .catch(err => {
-            console.log(err)
+            req.flash('error_msg','Error: '+err)
+             res.redirect('/')
         })
- 
+    } else {
+        res.redirect('/employee/search')
+    }
+    
+   
 
-    /*
+
+     /*
     let search_query = {
         name: req.query.search
     }
@@ -89,7 +102,7 @@ exports.getQuery = (req,res) =>{
             console.log(err)
         })
     */
-    
+
 }
 
 //___________________________ GET EDIT ___________________________________
@@ -104,7 +117,8 @@ exports.getEditWithID = (req,res) => {
             })
         })
         .catch(err => {
-            console.log(err)
+            req.flash('error_msg','Error: '+err)
+        res.redirect('/')
         })
 
 }
@@ -123,10 +137,12 @@ exports.putEditWithID = (req,res) => {
         }
     })
     .then(() => {
+        req.flash('success_msg','Employee Updated successfully....')
         res.redirect('/')
     })
     .catch(err => {
-        console.log(err)
+        req.flash('error_msg','Error: '+err)
+        res.redirect('/')
     })
 
 }
@@ -138,10 +154,12 @@ exports.postDeleteWithID = (req,res) => {
 
     Employee.deleteOne(employeeDelete)
         .then(() => {
+            req.flash('success_msg','Employee deleted successfully....')
             res.redirect('/')
         })
         .catch(err => {
-            console.log(err)
+            req.flash('error_msg','Error: '+err)
+            res.redirect('/')
         })
 
 
