@@ -10,6 +10,6 @@ router.get('/employee/search', employeeControllers.getSearchEmployees)
 router.get('/employee/query',employeeControllers.getQuery)
 router.get('/employee/edit/:id', employeeControllers.getEditWithID)
 router.put('/employee/edit/:id', employeeControllers.putEditWithID)
-
+router.delete('/employee/delete/:id', employeeControllers.postDeleteWithID)
 
 module.exports = router

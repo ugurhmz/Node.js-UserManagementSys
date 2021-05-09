@@ -32,7 +32,8 @@
                   <i class="fas fa-edit"></i> Edit
                 </a>
 
-                <form>
+                <form action="/employee/delete/<%= employee.id %>?_method=DELETE" method="POST">
+                 <input type="hidden" name="_method" value="DELETE">
                   <button type="submit" class="btn ms-3 ml-2 floatleft btn-danger btn-sm box-shadow">
                     <i class="fas fa-trash-alt"></i> Delete
                   </button>

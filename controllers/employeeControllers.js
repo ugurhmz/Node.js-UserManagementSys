@@ -4,6 +4,7 @@ const Employee = require('../models/employeeModel')
 //___________________________________ GET INDEX ______________________________
 exports.getIndex = (req,res) => {
     Employee.find()
+        
         .then(employees =>{
             res.render('index', {
                 employees:employees
@@ -62,6 +63,7 @@ exports.getQuery = (req,res) =>{
                 {"name": regex}, {"designation":regex}
             ]
         })
+        .sort({$natural : -1})
         .then(employee => {
             res.render('search_employee', {
                 employee:employee
@@ -126,5 +128,21 @@ exports.putEditWithID = (req,res) => {
     .catch(err => {
         console.log(err)
     })
+
+}
+
+
+
+exports.postDeleteWithID = (req,res) => {
+    const employeeDelete = { _id : req.params.id }
+
+    Employee.deleteOne(employeeDelete)
+        .then(() => {
+            res.redirect('/')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
 
 }
