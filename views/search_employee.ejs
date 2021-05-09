@@ -1,0 +1,55 @@
+<%-  include('include/_header.ejs') -%> 
+
+  
+     
+   
+
+    <!-- SEARCH CONTENT -->
+        <div class="container w-75 mt-5">
+
+            <h2 class="mb-3">Search an Employee in DB</h2>
+
+            <form action="/employee/query" method="GET" >
+                <input type="text" name="search" class="form-control" placeholder="Enter Employee Name">
+                <button class="btn btn-primary w-50  d-flex justify-content-center my-3 box-shadow" style="margin:0 auto;" type="submit">Search</button>
+            </form>
+            
+           
+        <% if (employee) { %>       
+            <h3 class="text-dark mb-5" style="margin-top:6rem;"> Search Results : <span class="bg-dark text-white p-2"><%= employee.length %></span></h3>
+            <table class="table  text-dark table-bordered"   cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Salary</th>
+                    
+                  </tr>
+                </thead>
+    
+                <tbody>
+                    
+                    <% employee.forEach(emp => { %>
+                        
+                        <tr>
+                            
+                            <td><%= emp.name %> </td>
+                            <td><%= emp.designation %> </td>
+                            <td><%= emp.salary %> </td>                
+                        </tr>
+
+                     
+                    <% }) %>
+                    
+                  
+                </tbody>
+              </table>
+              <% } %>
+
+        </div>
+
+        <!-- /SEARCH CONTENT -->
+   
+<%-  include('include/_footer.ejs') -%> 
+
+

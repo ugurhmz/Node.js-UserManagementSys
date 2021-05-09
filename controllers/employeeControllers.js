@@ -40,5 +40,57 @@ exports.postAddNew = (req,res) => {
 }
 
 
+exports.getSearchEmployees = (req,res) => {
+    
+    res.render('search_employee',{
+        employee:""
+    })
+}
 
 
+//_____________________________________ SEARCHING____________________________
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+exports.getQuery = (req,res) =>{
+   
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+        Employee.find( {
+            $or: [
+                {"name": regex}, {"designation":regex}
+            ]
+        })
+        .then(employee => {
+            res.render('search_employee', {
+                employee:employee
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+ 
+  
+
+
+
+
+
+    /*
+    let search_query = {
+        name: req.query.search
+    }
+
+    Employee.findOne(search_query)
+        .then(employee => {
+            res.render('search_employee', {
+                employee:employee
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    */
+    
+}
